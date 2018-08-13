@@ -1,23 +1,29 @@
 import {combineReducers} from 'redux'
-const xxxInit = 1;
-const yyyInit = 2;
-function xxx(preState = xxxInit,action) {
-    switch (action.type){
-        default :
-            return preState
-    }
+import {AUTH_SUCCESS,ERROR_MSG} from './actions-type';
+const initData = {
+    username: '',
+    password: '',
+    msg: '',
+    redirectTo: ''
 }
 
-function yyy(preState = yyyInit,action) {
+function user(preState = initData,action) {
     switch (action.type){
-        default :
+        case AUTH_SUCCESS :
+            const user = action.data;
+            console.log(user)
+            return {...user,redirectTo: '/'};
+        case ERROR_MSG :
+            const msg = action.data;
+            return {...preState,msg}
+        default:
             return preState
     }
+
 }
 
 export default combineReducers({
-    xxx,
-    yyy
+    user
 })
 /*
 1. 向外暴露是一个整合后的reducer函数: function (state, action)

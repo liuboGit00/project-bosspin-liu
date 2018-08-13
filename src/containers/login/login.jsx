@@ -3,9 +3,12 @@
  */
 import React, {Component} from 'react'
 import { NavBar, WingBlank, WhiteSpace,List,InputItem,Button} from 'antd-mobile';
+import {connect} from 'react-redux';
+import {Redirect} from  'react-router-dom';
 
+import {login} from '../../redux/actions';
 import Logo from '../../assets/logo/logo';
-export default class Login extends Component {
+class Login extends Component {
     state = {
       username: '',
       password: ''
@@ -16,12 +19,16 @@ export default class Login extends Component {
         })
     };
     handleLoad = () => {
-        console.log(this.state)
+        this.props.login(this.state)
     };
     toRegist = () => {
         this.props.history.replace('/register')
     };
     render() {
+        const {redirectTo} = this.props.user;
+        if (redirectTo){
+            return <Redirect to={redirectTo} />
+        }
         return (
             <div>
                 <NavBar>注册</NavBar>
@@ -47,3 +54,8 @@ export default class Login extends Component {
         )
     }
 }
+
+export default connect (
+    state => ({user: state.user}),
+    {login}
+)(Login)
