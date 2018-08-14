@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import {Redirect} from  'react-router-dom';
 
 import {login} from '../../redux/actions';
-import Logo from '../../assets/logo/logo';
+import Logo from '../../components/logo/logo';
 class Login extends Component {
     state = {
       username: '',
@@ -25,7 +25,7 @@ class Login extends Component {
         this.props.history.replace('/register')
     };
     render() {
-        const {redirectTo} = this.props.user;
+        const {msg,redirectTo} = this.props.user;
         if (redirectTo){
             return <Redirect to={redirectTo} />
         }
@@ -35,6 +35,7 @@ class Login extends Component {
                 <Logo />
                 <WingBlank>
                     <List>
+                        <p className='errMsg'>{msg}</p>
                         <WhiteSpace />
                         <InputItem placeholder='请输入用户名'
                              onChange={(val) => {this.handleChange('username',val)}}

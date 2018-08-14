@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { NavBar, WingBlank, WhiteSpace,List,InputItem,Radio,Button} from 'antd-mobile';
 import {connect} from 'react-redux';
-import Logo from '../../assets/logo/logo';
+import Logo from '../../components/logo/logo';
 import {Redirect} from 'react-router-dom';
 
 import {register} from '../../redux/actions';
@@ -36,7 +36,7 @@ class Register extends Component {
                 <Logo />
                 <WingBlank>
                     <List>
-                        <p>{msg}</p>
+                        <p className='errMsg'>{msg}</p>
                         <WhiteSpace />
                         <InputItem placeholder='请输入用户名'
                            onChange={(val) => {this.handleChange('username',val)}}

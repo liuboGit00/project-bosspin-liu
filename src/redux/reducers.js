@@ -1,5 +1,7 @@
 import {combineReducers} from 'redux'
-import {AUTH_SUCCESS,ERROR_MSG} from './actions-type';
+
+import {AUTH_SUCCESS,ERROR_MSG,RECEIVE_USER,RESET_USER} from './actions-type';
+import path from '../utils/path/setPath';
 const initData = {
     username: '',
     password: '',
@@ -12,10 +14,16 @@ function user(preState = initData,action) {
         case AUTH_SUCCESS :
             const user = action.data;
             console.log(user)
-            return {...user,redirectTo: '/'};
+            return {...user,redirectTo: path(user.type)};
         case ERROR_MSG :
             const msg = action.data;
             return {...preState,msg}
+        case RECEIVE_USER :
+            const updateUser = action.data;
+            return updateUser
+        case RESET_USER :
+            const resetMsg = action.data;
+            return {...preState,msg: resetMsg}
         default:
             return preState
     }

@@ -7,6 +7,7 @@ import login from './containers/login/login'
 import register from './containers/register/regist'
 import main from './containers/main/main'
 import store from './redux/store'
+import './assets/index/index.less';
 
 ReactDom.render(
     <Provider store={store}>
