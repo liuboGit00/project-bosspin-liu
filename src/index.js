@@ -8,6 +8,7 @@ import register from './containers/register/regist'
 import main from './containers/main/main'
 import store from './redux/store'
 import './assets/index/index.less';
+import './test/socketio_test'
 
 ReactDom.render(
     <Provider store={store}>

@@ -1,8 +1,8 @@
 /*
 * 此模块为actions模块
 * */
-import {AUTH_SUCCESS,ERROR_MSG,RECEIVE_USER,RESET_USER} from './actions-type';
-import {reqRegister,reqLogin,reqUpdate} from '../api/index';
+import {AUTH_SUCCESS,ERROR_MSG,RECEIVE_USER,RESET_USER,GET_USERLIST} from './actions-type';
+import {reqRegister,reqLogin,reqUpdate,reqGetuser,reqUserList} from '../api/index';
 /*
 * 注册异步的action
 * */
@@ -12,7 +12,10 @@ const errMsg = msg => ({type: ERROR_MSG,data: msg});
 
 //收到用户信息同步
 const achieveUser = user => ({type: RECEIVE_USER,data:user});
-const resetUser = msg => ({type: RESET_USER,data:msg})
+export const resetUser = msg => ({type: RESET_USER,data:msg});
+
+const getUserList = userList => ({type:GET_USERLIST,data:userList})
+
 
 
 export function register({username,password,confirmPwd,type}) {
@@ -67,13 +70,37 @@ export function updateInfo(data) {
         console.log(data)
         const response = await reqUpdate(data);
         const result = response.data;
-        console.log(result)
         if (result.code === 0){
             const user = result.data
             dispatch(achieveUser(user))
         }else {
             const msg = result.msg
             dispatch(resetUser(msg))
+        }
+    }
+}
+
+export function getUser() {
+    return async dispatch => {
+        const response = await reqGetuser();
+        const result = response.data;
+        if (result.code === 0){
+            const user = result.data
+            dispatch(achieveUser(user))
+        }else {
+            const msg = result.msg
+            dispatch(resetUser(msg))
+        }
+    }
+}
+
+export function receiveUserList(type) {
+    return async dispatch => {
+        //异步操作
+        const response = await reqUserList(type)
+        const result = response.data;
+        if (result.code === 0){
+            dispatch(getUserList(result.data))
         }
     }
 }

@@ -27,11 +27,11 @@ class Login extends Component {
     render() {
         const {msg,redirectTo} = this.props.user;
         if (redirectTo){
-            return <Redirect to={redirectTo} />
+            return <Redirect to={redirectTo} /> //根据redux里的状态 选择跳转到 大神 还是老板页面
         }
         return (
-            <div>
-                <NavBar>注册</NavBar>
+            <div style={{marginTop: 50}}>
+                <NavBar>登陆</NavBar>
                 <Logo />
                 <WingBlank>
                     <List>

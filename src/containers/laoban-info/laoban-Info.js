@@ -33,7 +33,7 @@ class LaoBanInfo extends Component{
             return <Redirect to='/laoban' />
         }
         return (
-            <div>
+            <div style={{marginTop: 50}}>
                 <NavBar>老板信息完善</NavBar>
                 <SelectHeader selectHeader={this.selectHeader}/>
                 <WingBlank>

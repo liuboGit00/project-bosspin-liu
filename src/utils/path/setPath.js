@@ -1,10 +1,13 @@
-export default function (type) {
+export default function (type,header) {
     let path = '';
     if (type === 'dashen'){
-        path += '/dasheninfo'
+        path += '/dashen'
     }else if (type === 'laoban'){
-        path += '/laobaninfo'
+        path += '/laoban'
     }
 
+    if (!header){
+        path += 'info'
+    }
     return path
 }

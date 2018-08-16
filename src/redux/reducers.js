@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
 
-import {AUTH_SUCCESS,ERROR_MSG,RECEIVE_USER,RESET_USER} from './actions-type';
+import {AUTH_SUCCESS,ERROR_MSG,RECEIVE_USER,RESET_USER,GET_USERLIST} from './actions-type';
 import path from '../utils/path/setPath';
 const initData = {
     username: '',
@@ -14,7 +14,7 @@ function user(preState = initData,action) {
         case AUTH_SUCCESS :
             const user = action.data;
             console.log(user)
-            return {...user,redirectTo: path(user.type)};
+            return {...user,redirectTo: path(user.type,user.header)};
         case ERROR_MSG :
             const msg = action.data;
             return {...preState,msg}
@@ -23,15 +23,27 @@ function user(preState = initData,action) {
             return updateUser
         case RESET_USER :
             const resetMsg = action.data;
-            return {...preState,msg: resetMsg}
+            console.log(resetMsg)
+            return {...initData,msg: resetMsg}
         default:
             return preState
     }
 
 }
 
+const initList = []
+function userList(preState = initList,action) {
+    switch (action.type){
+        case GET_USERLIST:
+            return action.data
+        default:
+            return preState
+    }
+}
+
 export default combineReducers({
-    user
+    user,
+    userList
 })
 /*
 1. 向外暴露是一个整合后的reducer函数: function (state, action)

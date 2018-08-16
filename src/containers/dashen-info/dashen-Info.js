@@ -31,7 +31,7 @@ class DaShenInfo extends Component{
             return <Redirect to='/dashen' />
         }
         return (
-            <div>
+            <div style={{marginTop: 50}}>
                 <NavBar>大神信息完善</NavBar>
                 <SelectHeader selectHeader={this.selectHeader}/>
                 <WingBlank>

@@ -31,7 +31,7 @@ class Register extends Component {
             return <Redirect to={redirectTo} />
         }
         return (
-            <div>
+            <div style={{marginTop: 50}}>
                 <NavBar>注册</NavBar>
                 <Logo />
                 <WingBlank>
