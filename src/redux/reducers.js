@@ -1,14 +1,21 @@
 import {combineReducers} from 'redux'
 
-import {AUTH_SUCCESS,ERROR_MSG,RECEIVE_USER,RESET_USER,GET_USERLIST} from './actions-type';
+import {AUTH_SUCCESS,
+    ERROR_MSG,
+    RECEIVE_USER,
+    RESET_USER,
+    GET_USERLIST,
+    RECEIVE_CHAT_MSGS,
+    RECEIVE_CHAT_MSG
+} from './actions-type';
 import path from '../utils/path/setPath';
+
 const initData = {
     username: '',
     password: '',
     msg: '',
     redirectTo: ''
 }
-
 function user(preState = initData,action) {
     switch (action.type){
         case AUTH_SUCCESS :
@@ -41,9 +48,35 @@ function userList(preState = initList,action) {
     }
 }
 
+const initChatMsgs = {
+    chatMsgs:[],
+    users:{},
+    unReadCount: 0
+}
+function chat(preState = initChatMsgs,action) {
+    switch (action.type){
+        case RECEIVE_CHAT_MSGS:
+            const {users,chatMsgs} = action.data
+            return {
+                users,
+                chatMsgs,
+                unReadCount: 0
+            }
+        case RECEIVE_CHAT_MSG:
+            return {
+                users: preState.users,
+                chatMsgs: [...preState.chatMsgs, action.data],
+                unReadCount: 0
+            }
+        default:
+            return preState
+    }
+}
+
 export default combineReducers({
     user,
-    userList
+    userList,
+    chat
 })
 /*
 1. 向外暴露是一个整合后的reducer函数: function (state, action)

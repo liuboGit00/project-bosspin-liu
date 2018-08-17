@@ -13,6 +13,7 @@ import LaoBan from '../laoban/laoban';
 import DaShen from '../dashen/dashen';
 import Message from '../message/message'
 import Personal from '../person/person'
+import Chat from '../chat/chat'
 import FootBar from '../../components/nav-footer/nav-footer'
 import NotFound from '../../components/notFound/notFound'
 import {getUser} from '../../redux/actions'
@@ -91,6 +92,7 @@ class Main extends Component {
                         <Route path='/dashen' component={DaShen} />
                         <Route path='/personal' component={Personal} />
                         <Route path='/message' component={Message} />
+                        <Route path='/chat/:id' component={Chat} />
                         <Route component={NotFound} />
                     </Switch>
                     { currentNav ? <FootBar navList={this.navList}/> : null}

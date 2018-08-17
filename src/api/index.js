@@ -8,3 +8,4 @@ export const reqLogin = (username,password) => axios('/login',{username,password
 export const reqUpdate = (data) => axios('/update',data,'POST');
 export const reqGetuser = () => axios('/user');
 export const reqUserList = type => axios('/list',{type})
+export const reqChatMsgs = () => axios('/msglist')
